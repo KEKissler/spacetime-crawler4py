@@ -1,5 +1,8 @@
 import re
+import lxml.html as lxml
+from lxml import etree
 from urllib.parse import urlparse
+from io import StringIO, BytesIO
 
 def scraper(url, resp):
     links = extract_next_links(url, resp)
@@ -7,8 +10,28 @@ def scraper(url, resp):
 
 def extract_next_links(url, resp):
     # Implementation requred.
-    return list()
+	print("hi\n")
+	print(url, "\n")
+	print(resp.url, "\n")
+	print(resp.status, "\n")
+	print(resp.error, "\n")
+	print("*** RAW RESPONSE***")
+	print(type(resp.raw_response.content), "\n")
+	s = lxml.parse(StringIO(resp.url))
+	print(type(s))
+	print(s,"\n")
 
+	broke_html = "<html><head><title>test<body><h1>page title</h3>"
+	parser = etree.HTMLParser()
+	tree = etree.parse(StringIO(broke_html), parser)
+	result = etree.tostring(tree.getroot(), pretty_print=True, method="html")
+	print(result)
+
+	print(resp.raw_response.content)
+
+
+	return list()
+	
 def is_valid(url):
     try:
         parsed = urlparse(url)
