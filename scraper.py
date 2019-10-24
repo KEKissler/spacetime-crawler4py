@@ -14,7 +14,6 @@ def extract_next_links(url, resp):
         if(resp.status >= 600 and resp.status <= 608):
             raise Exception()
         a = parse_urls(resp.raw_response.content)
-        #print(a)
         return a
     except:
         print("\t\t*****Error reading*****")
