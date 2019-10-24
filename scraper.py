@@ -2,6 +2,7 @@ import re
 import lxml.html as lxml
 from lxml import etree
 from urllib.parse import urlparse
+from urllib.parse import urlunparse
 from io import StringIO, BytesIO
 
 def scraper(url, resp):
@@ -9,14 +10,27 @@ def scraper(url, resp):
     return [link for link in links if is_valid(link)]
 
 def extract_next_links(url, resp):
-    a = parse_urls(resp.raw_response.content)
-    #print(a)
-    return a
+    try:
+        if(resp.status >= 600 and resp.status <= 608):
+            raise Exception()
+        a = parse_urls(resp.raw_response.content)
+        #print(a)
+        return a
+    except:
+        print("\t\t*****Error reading*****")
+        return list()
 
 def parse_urls(html_content):
     urlPattern = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:(?:[a-zA-Z_]+\.)*(?:ics|cs|informatics|stat)|(?:today))\.uci\.edu(?:\/[a-zA-Z_]+)*(?:\.[a-zA-Z_]+)?(?:\?[a-zA-Z_]+=[^\s\"]+)?(?:#[^\s\"]+)?", re.M)
-    return [x for x in re.findall(urlPattern, str(html_content))]
-	
+    result = []
+    for url in re.findall(urlPattern, str(html_content)):
+        try:
+            parsed = urlparse(url)
+            result.append(urlunparse(parsed))
+        except TypeError:
+            print("TypeError for ", parsed)
+    return result
+
 def is_valid(url):
     try:
         parsed = urlparse(url)
