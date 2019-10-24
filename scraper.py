@@ -9,28 +9,13 @@ def scraper(url, resp):
     return [link for link in links if is_valid(link)]
 
 def extract_next_links(url, resp):
-    # Implementation requred.
-	print("hi\n")
-	print(url, "\n")
-	print(resp.url, "\n")
-	print(resp.status, "\n")
-	print(resp.error, "\n")
-	print("*** RAW RESPONSE***")
-	print(type(resp.raw_response.content), "\n")
-	s = lxml.parse(StringIO(resp.url))
-	print(type(s))
-	print(s,"\n")
+    a = parse_urls(resp.raw_response.content)
+    #print(a)
+    return a
 
-	broke_html = "<html><head><title>test<body><h1>page title</h3>"
-	parser = etree.HTMLParser()
-	tree = etree.parse(StringIO(broke_html), parser)
-	result = etree.tostring(tree.getroot(), pretty_print=True, method="html")
-	print(result)
-
-	print(resp.raw_response.content)
-
-
-	return list()
+def parse_urls(html_content):
+    urlPattern = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:(?:[a-zA-Z_]+\.)*(?:ics|cs|informatics|stat)|(?:today))\.uci\.edu(?:\/[a-zA-Z_]+)*(?:\.[a-zA-Z_]+)?(?:\?[a-zA-Z_]+=[^\s\"]+)?(?:#[^\s\"]+)?", re.M)
+    return [x for x in re.findall(urlPattern, str(html_content))]
 	
 def is_valid(url):
     try:
