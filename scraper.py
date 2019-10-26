@@ -18,7 +18,7 @@ def scraper(url, resp):
 
 def extract_next_links(url, resp):
     a = list()
-    soup = BeautifulSoup(resp.raw_response.content)
+    soup = BeautifulSoup(resp.raw_response.content, features="lxml")
     for link in soup.find_all('a'):
         a.append(normalize_link(url, link.get('href')))
     return a
@@ -27,9 +27,9 @@ def normalize_link(current_link, new_link):
     parsed = urlparse(new_link)
     parsedOld = urlparse(current_link)
     if(parsed.path != "" and parsed.netloc == ""):
-        result = urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], parsed[5]))
-        return result
-    return new_link
+        return urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], ""))
+    return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
+
 
 def is_valid(url):
     try:
@@ -54,7 +54,7 @@ def is_valid(url):
             + r"|epub|dll|cnf|tgz|sha1"
             + r"|thmx|mso|arff|rtf|jar|csv"
             + r"|rm|smil|wmv|swf|wma|zip|rar|gz"
-	        + r"|pdfs|css|js|ppts|exe|o|apk)$", parsed.path.lower())
+	    + r"|pdf|pdfs|css|js|ppts|exe|o|apk|sql)$", parsed.path.lower())
 
     except TypeError:
         print ("TypeError for ", parsed)
