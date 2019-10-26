@@ -1,2 +1,4 @@
 .*?wics\.ics\.uci\.edu\/events\/category\/boothing.*
 .*?today\.uci\.edu\/department\/information_computer_sciences\/calendar.*
+.*?ics\.uci\.edu\/~mguindan.*
+.*?ics\.uci\.edu\/~hombao\/hernando\.html.*
