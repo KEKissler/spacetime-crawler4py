@@ -54,7 +54,7 @@ def is_valid(url):
             + r"|epub|dll|cnf|tgz|sha1"
             + r"|thmx|mso|arff|rtf|jar|csv"
             + r"|rm|smil|wmv|swf|wma|zip|rar|gz"
-	    + r"|pdfs|css|js|ppts|exe|o)$", parsed.path.lower())
+	        + r"|pdfs|css|js|ppts|exe|o|apk)$", parsed.path.lower())
 
     except TypeError:
         print ("TypeError for ", parsed)
