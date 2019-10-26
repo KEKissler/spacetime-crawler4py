@@ -40,8 +40,13 @@ def is_valid(url):
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
             return False
-        if(re.match(r".*?wics\.ics\.uci\.edu\/events\/category\/boothing.*", str(parsed.path.lower())) is not None):
-            return False
+        file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
+        nextLine = file.readline()
+        while nextLine:
+            if(re.match(nextLine, str()parsed.path.lower()) is not None):
+                print("Ignored " + parsed.path.lower() + " due to blacklist line" + nextLine)
+                return False
+            nextLine = file.readline()
         return not re.match(
             r".*\.(css|js|bmp|gif|jpe?g|ico"
             + r"|png|tiff?|mid|mp2|mp3|mp4"

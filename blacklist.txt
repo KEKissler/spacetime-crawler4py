@@ -1,0 +1,1 @@
+.*?wics\.ics\.uci\.edu\/events\/category\/boothing.*
