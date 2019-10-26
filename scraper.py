@@ -29,7 +29,6 @@ def normalize_link(current_link, new_link):
     if(parsed.path != "" and parsed.netloc == ""):
         result = urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], parsed[5]))
         return result
-        #print('t\t normalized link: ' + result)
     return new_link
 
 def is_valid(url):
@@ -37,10 +36,8 @@ def is_valid(url):
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
             return False
-        if(re.match(r"(\.(ics|cs|informatics|stat)|today)\.uci\.edu", str(parsed.geturl())) is None):
+        if(re.match(r".*?((ics|cs|informatics|stat)\.uci\.edu)|(today\.uci\.edu\/department\/information_computer_sciences).*", parsed.netloc) is None):
             return False
-        else:
-            print("rejected link: " + parsed.geturl())
         file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
         nextLine = file.readline()
         while nextLine:

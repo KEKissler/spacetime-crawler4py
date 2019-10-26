@@ -1,1 +1,2 @@
 .*?wics\.ics\.uci\.edu\/events\/category\/boothing.*
+.*?today\.uci\.edu\/department\/information_computer_sciences\/calendar.*
