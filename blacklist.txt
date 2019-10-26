@@ -4,3 +4,5 @@
 .*?ics\.uci\.edu\/~hombao\/hernando\.html.*
 .*?hack\.ics\.uci\.edu\/\d{4}\/\d{2}\/\d{2}\/hackuci-\d{4}-gallery.*W
 .*?hack\.ics\.uci\.edu.*?(?:(?:gallery\/[\d_\w-]+)|(?:img_[\d_\w-]+)$)
+.*?grape\.ics\.uci\.edu\/wiki\/asterix\/timeline.*
+.*?grape\.ics\.uci\.edu.*?&format=txt

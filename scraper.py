@@ -8,9 +8,9 @@ from bs4 import BeautifulSoup
 
 
 def scraper(url, resp):
-
+    if resp.status >= 400 and resp.status < 600:
+        return list()
     if resp.status >= 600 and resp.status <= 608:
-        #print('resp.status error')
         return list()
 
     links = extract_next_links(url, resp)
@@ -36,7 +36,7 @@ def is_valid(url):
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
             return False
-        if(re.match(r".*?((ics|cs|informatics|stat)\.uci\.edu)|(today\.uci\.edu\/department\/information_computer_sciences).*", parsed.netloc) is None):
+        if(re.match(r".*?((^|\.)(ics|cs|informatics|stat)\.uci\.edu)|(today\.uci\.edu\/department\/information_computer_sciences).*", parsed.netloc) is None):
             return False
         file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
         nextLine = file.readline()
