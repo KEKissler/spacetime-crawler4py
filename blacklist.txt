@@ -7,3 +7,5 @@
 .*?grape\.ics\.uci\.edu\/wiki\/asterix\/wiki\/stats170ab-2018\?version=\d+
 .*?ics\.uci\.edu\/\w\d\d\.html$
 .*?ics\.uci\.edu\/~kibler\/javacourse\/java.html
+.*?archive\.ics\.uci\.edu.*
+.*?\.ics\.uci\.edu\/~kay\/wordlist.*
