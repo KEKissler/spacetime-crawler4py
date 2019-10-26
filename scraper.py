@@ -13,10 +13,6 @@ def scraper(url, resp):
     if resp.status >= 600 and resp.status <= 608:
         return list()
 
-    if resp.status == 200 and resp.raw_response.content is None:
-        print('no data on page')
-        return list()
-
     links = extract_next_links(url, resp)
     return [link for link in links if is_valid(link)]
 
@@ -31,7 +27,8 @@ def normalize_link(current_link, new_link):
     parsed = urlparse(new_link)
     parsedOld = urlparse(current_link)
     if(parsed.path != "" and parsed.netloc == ""):
-        return urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], ""))
+        if(re.match(r"\w+@\w+\.[a-zA-Z]+", parsed.path) is None): #verify path is not an email, so we dont make a lot of bogus email links
+            return urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], ""))
     return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
 
 
