@@ -17,34 +17,35 @@ def scraper(url, resp):
     return [link for link in links if is_valid(link)]
 
 def extract_next_links(url, resp):
-#    a = parse_urls(resp.raw_response.content)
     a = list()
     soup = BeautifulSoup(resp.raw_response.content)
     for link in soup.find_all('a'):
-        a.append(link.get('href'))
+        a.append(normalize_link(url, link.get('href')))
     return a
 
-def parse_urls(html_content):
-    urlPattern = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:(?:[a-zA-Z_]+\.)*(?:ics|cs|informatics|stat)|(?:today))\.uci\.edu(?:\/[a-zA-Z_]+)*(?:\.[a-zA-Z_]+)?(?:\?[a-zA-Z_]+=[^\s\"]+)?(?:#[^\s\"]+)?", re.M)
-    result = []
-    for url in re.findall(urlPattern, str(html_content)):
-        try:
-            parsed = urlparse(url)
-            result.append(urlunparse(parsed))
-        except TypeError:
-            print("TypeError for ", parsed)
-    return result
+def normalize_link(current_link, new_link):
+    parsed = urlparse(new_link)
+    parsedOld = urlparse(current_link)
+    if(parsed.path != "" and parsed.netloc == ""):
+        result = urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], parsed[5]))
+        return result
+        #print('t\t normalized link: ' + result)
+    return new_link
 
 def is_valid(url):
     try:
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
             return False
+        if(re.match(r"(\.(ics|cs|informatics|stat)|today)\.uci\.edu", str(parsed.geturl())) is None):
+            return False
+        else:
+            print("rejected link: " + parsed.geturl())
         file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
         nextLine = file.readline()
         while nextLine:
-            if(re.match(nextLine, str()parsed.path.lower()) is not None):
-                print("Ignored " + parsed.path.lower() + " due to blacklist line" + nextLine)
+            if(re.match(nextLine, str(parsed.geturl())) is not None):
+                print("Ignored " + parsed.geturl() + " due to blacklist line" + nextLine)
                 return False
             nextLine = file.readline()
         return not re.match(
