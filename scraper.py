@@ -4,20 +4,25 @@ from lxml import etree
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 from io import StringIO, BytesIO
+from bs4 import BeautifulSoup
+
 
 def scraper(url, resp):
+
+    if resp.status >= 600 and resp.status <= 608:
+        #print('resp.status error')
+        return list()
+
     links = extract_next_links(url, resp)
     return [link for link in links if is_valid(link)]
 
 def extract_next_links(url, resp):
-    try:
-        if(resp.status >= 600 and resp.status <= 608):
-            raise Exception()
-        a = parse_urls(resp.raw_response.content)
-        return a
-    except:
-        print("\t\t*****Error reading*****")
-        return list()
+#    a = parse_urls(resp.raw_response.content)
+    a = list()
+    soup = BeautifulSoup(resp.raw_response.content)
+    for link in soup.find_all('a'):
+        a.append(link.get('href'))
+    return a
 
 def parse_urls(html_content):
     urlPattern = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:(?:[a-zA-Z_]+\.)*(?:ics|cs|informatics|stat)|(?:today))\.uci\.edu(?:\/[a-zA-Z_]+)*(?:\.[a-zA-Z_]+)?(?:\?[a-zA-Z_]+=[^\s\"]+)?(?:#[^\s\"]+)?", re.M)
@@ -34,6 +39,8 @@ def is_valid(url):
     try:
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
+            return False
+        if(re.match(r".*?wics\.ics\.uci\.edu\/events\/category\/boothing.*", str(parsed.path.lower())) is not None):
             return False
         return not re.match(
             r".*\.(css|js|bmp|gif|jpe?g|ico"
