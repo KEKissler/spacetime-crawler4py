@@ -13,6 +13,10 @@ def scraper(url, resp):
     if resp.status >= 600 and resp.status <= 608:
         return list()
 
+    if resp.status == 200 and resp.raw_response.content is None:
+        print('no data on page')
+        return list()
+
     links = extract_next_links(url, resp)
     return [link for link in links if is_valid(link)]
 
