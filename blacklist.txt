@@ -6,3 +6,4 @@
 .*?hack\.ics\.uci\.edu.*?(?:(?:gallery\/[\d_\w-]+)|(?:img_[\d_\w-]+)$)
 .*?grape\.ics\.uci\.edu\/wiki\/asterix\/timeline.*
 .*?grape\.ics\.uci\.edu.*?&format=txt
+.*?grape\.ics\.uci\.edu\/wiki\/asterix\/wiki\/stats170ab-2018\?version=\d+
