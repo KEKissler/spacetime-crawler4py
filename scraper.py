@@ -18,7 +18,8 @@ def scraper(url, resp):
 
 def extract_next_links(url, resp):
     a = list()
-    soup = BeautifulSoup(resp.raw_response.content, features="lxml")
+    #soup = BeautifulSoup(resp.raw_response.content, features="lxml")
+    soup = BeautifulSoup(resp.raw_response.text.encode("utf-8"), features="lxml")
     for link in soup.find_all('a'):
         a.append(normalize_link(url, link.get('href')))
     return a
@@ -46,6 +47,7 @@ def is_valid(url):
                 print("Ignored " + parsed.geturl() + " due to blacklist line" + nextLine)
                 return False
             nextLine = file.readline()
+        file.close()
         return not re.match(
             r".*\.(css|js|bmp|gif|jpe?g|ico"
             + r"|png|tiff?|mid|mp2|mp3|mp4"
@@ -56,7 +58,7 @@ def is_valid(url):
             + r"|thmx|mso|arff|rtf|jar|csv"
             + r"|rm|smil|wmv|swf|wma|zip|rar|gz"
 	        + r"|pdf|pdfs|css|js|ppts|exe|o"
-			+ r"|war|apk|sql)$", parsed.path.lower())
+            + r"|war|apk|sql|ppsx|pptx)$", parsed.path.lower())
 
     except TypeError:
         print ("TypeError for ", parsed)

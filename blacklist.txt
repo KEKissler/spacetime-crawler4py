@@ -9,3 +9,12 @@
 .*?ics\.uci\.edu\/~kibler\/javacourse\/java.html
 .*?archive\.ics\.uci\.edu.*
 .*?\.ics\.uci\.edu\/~kay\/wordlist.*
+.*?\.ics\.uci\.edu\/~shantas\/publications\/.*
+.*?dynamo\.ics\.uci\.edu\/files\/zImage_paapi.*
+.*?\.informatics\.uci\.edu\/files\/pdf\/.*
+.*?\.ics\.uci\.edu\/~magda\/ics_x33\/.*
+.*?grape\.ics\.uci\.edu\/.*
+.*hack\.ics\.uci\.edu\/(.*gallery|category\/photos).*
+.*?hack\.ics\.uci\.edu(.*?\/gallery|\/category\/photos|.*)\/(img_.*|)
+.*?wics\.ics\.uci\.edu\/events\/category\/.*
+.*?wics\.ics\.uci\.edu\/(a\/|language.php|recover).*

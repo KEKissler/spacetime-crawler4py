@@ -1,0 +1,38 @@
+ERROR CODES DISPLAYED IN OUTPUT
+
+encoding error : input conversion failed due to input error, bytes 0x81 0xFA 0x39 0x52
+encoding error : input conversion failed due to input error, bytes 0x81 0xFA 0x39 0x52
+
+#stuck in wics/.../... regex not working
+
+
+BAD WEBSITES:
+# http://dynamo.ics.uci.edu/files/zImage_paapi
+# http://www.ics.uci.edu/~shantas/publications/16-Private_and_Secure_Secret_Shared_MapReduce.ppsx
+
+#file download http://www.ics.uci.edu/~shantas/publications/12-Self-stabilizing_End-to-End_Communication.ppsx
+
+#https://www.ics.uci.edu/~shantas/publications/
+not skipping ppsx downloads?
+
+#http://www.informatics.uci.edu/files/pdf/InformaticsBrochure-March2018
+
+#https://grape.ics.uci.edu/wiki/public/wiki/cs222-2018-fall
+
+#dynamo.ics.uci.edu/api/files.html
+
+#https://wics.ics.uci.edu/events/category/boothing/2016-11-29/
+
+#https://wics.ics.uci.edu/a/language.php?l=pt_BR&lref=https%3A%2F%2Fm.facebook.com%2Flogin.php%3Fskip_api_login%3D1%26api_key%3D966242223397117%26signed_next%3D1%26next%3Dhttps%253A%252F%252Fm.facebook.com%252Fsharer.php%253Fu%253Dhttps%25253A%25252F%25252Fwics.ics.uci.edu%25252Fwics-goes-to-blizzard%25252F%2526t%253DWICS%252BGoes%252Bto%252BBlizzard%252521%26cancel_url%3Dhttps%253A%252F%252Fm.facebook.com%252Fdialog%252Fclose_window%252F%253Fapp_id%253D966242223397117%2526connect%253D0%2523_%253D_%26display%3Dtouch%26locale%3Den_US&index=2&gfid=AQCHgY8TcXoo-FjD&ref_component=mbasic_footer&ref_page=XLoginController&locale2=en_US&refid=9
+
+#https://wics.ics.uci.edu/recover/initiate/?c=https%3A%2F%2Fm.facebook.com%2Flogin.php%3Fskip_api_login%3D1%26api_key%3D966242223397117%26signed_next%3D1%26next%3Dhttps%253A%252F%252Fm.facebook.com%252Fsharer.php%253Fu%253Dhttps%25253A%25252F%25252Fwics.ics.uci.edu%25252Fwics-swe-hosts-women-in-consulting-with-capgemini%25252F%2526t%253DWICS%252B%252526%252BSWE%252BHosts%252B%252522Women%252Bin%252BConsulting%252522%252Bwith%252BCapgemini%26cancel_url%3Dhttps%253A%252F%252Fm.facebook.com%252Fdialog%252Fclose_window%252F%253Fapp_id%253D966242223397117%2526connect%253D0%2523_%253D_%26display%3Dtouch%26locale%3Den_US&r&cuid&ars=facebook_login&lwv=100&locale2=en_US&refid=9
+
+
+
+QUESTIONABLE:
+
+http://www.ics.uci.edu/gallery/gallery_01_jpg.php
+
+https://www.cs.uci.edu/event/kathryn-s-mckinley/
+	past events no info
+
