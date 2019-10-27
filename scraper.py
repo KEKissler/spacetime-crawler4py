@@ -40,6 +40,9 @@ def is_valid(url):
             return False
         if(re.match(r".*?((^|\.)(ics|cs|informatics|stat)\.uci\.edu)|(today\.uci\.edu\/department\/information_computer_sciences).*", parsed.netloc) is None):
             return False
+        if(re.match(r"[^\w:\/%@\.\&\-_\?,= ]", parsed.geturl()) is not None):
+            print("CONTAINS INVALID CHARACTERS: " + parse.geturl())
+            return False
         file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
         nextLine = file.readline()
         while nextLine:
