@@ -6,6 +6,16 @@ from urllib.parse import urlunparse
 from io import StringIO, BytesIO
 from bs4 import BeautifulSoup
 
+def tokenize():
+    #tokenCount = -1
+    #tokensFile = open("tokensFile","a+")
+    #count all tokens
+    #save tokens to file
+
+
+
+    return tokenCount
+
 
 def scraper(url, resp):
     if resp.status >= 400 and resp.status < 600:
@@ -14,7 +24,22 @@ def scraper(url, resp):
         return list()
 
     links = extract_next_links(url, resp)
-    return [link for link in links if is_valid(link)]
+    
+    #return [link for link in links if is_valid(link)]
+    
+    urlsFile = open("urls.txt","a+")
+
+    for link in links:
+        if is_valid(link):
+            #openfile and print url, tokenCount = ?
+            urlsFile.write(link + " " + tokenize(?))
+            #call tokenize
+            
+        else:
+            #openfile and print url, tokenCount = -1
+            urlsFile.write(link + " " + "-1")
+
+    return token;
 
 def extract_next_links(url, resp):
     a = list()
