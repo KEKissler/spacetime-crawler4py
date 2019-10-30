@@ -178,18 +178,11 @@ q = {"a",
 "yourselves"}
 
 def tokenize(string):
-    string = ""
-    try:
-        for x in open("soupSiteText.txt", "r", encoding = "utf-8").readlines():
-            string += x
-    finally:
-        file.close()
-        
     tokenCount = 0
     wordPattern = re.compile(r"[\da-z]+", re.MULTILINE | re.IGNORECASE)
     ignoredPunctuation = re.compile(r"[^a-z\s-]", re.IGNORECASE)
     try:
-        tokenFile = open("tokens.txt","a+")
+        tokenFile = open("frontier.shelve.tokens.txt","a+")
         string = re.sub(ignoredPunctuation, '', string)
         for token in re.findall(wordPattern, string):
             if token.strip().lower() not in q:
