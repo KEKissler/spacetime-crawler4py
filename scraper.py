@@ -20,7 +20,10 @@ def scraper(url, resp):
     for contentGroup in soup.find_all(['p', 'title', re.compile(r"^h[0-9]+$")]):
         for string in contentGroup.stripped_strings:
             contentText += string + ' '
-    urlsFile = open("frontier.shelve.urls.txt","a+")
+    try:
+        urlsFile = open("frontier.shelve.urls.txt","a+")
+    finally:
+        urlsFile.close()
 
     result = []
     for link in links:
