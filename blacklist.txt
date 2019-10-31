@@ -18,6 +18,9 @@
 .*?hack\.ics\.uci\.edu(.*?\/gallery|\/category\/photos|.*)\/(img_.*|)
 .*?wics\.ics\.uci\.edu\/events\/category.*
 .*?wics\.ics\.uci\.edu\/(a\/|language.php|recover).*
-.*?wics\.ics\.uci\.edu\/events\/category.*
 .*?ics\.uci\.edu\/publications\/r\d{3}\.html$
 .*?informatics\.uci\.edu\/files\/pdf\/InformaticsBrochure-March2018
+.*?emj\.ics\.uci\.edu\/wp-content\/emj\/uploads\/MjolsnessCunhaPMAV24Oct2012
+.*?evoke\.ics\.uci\.edu\/.*?\/\?replytocom=\d+
+.*?wics\.ics\.uci\.edu\/events\/\d{4}-\d{2}(-\d{2})?
+.*?cs\.uci\.edu\/%20.*?@uci\.edu

@@ -3,6 +3,7 @@ import lxml.html as lxml
 from lxml import etree
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
+from Tokenize import tokenize
 from io import StringIO, BytesIO
 from bs4 import BeautifulSoup
 
@@ -21,17 +22,16 @@ def scraper(url, resp):
         for string in contentGroup.stripped_strings:
             contentText += string + ' '
     try:
-        urlsFile = open("frontier.shelve.urls.txt","a+")
+        urlsFile = open("frontier.shelve.urls.txt","a+", encoding = "utf-8")
+        urlsFile.write(str(url) + " " + str(tokenize(contentText)) + '\n')
+        result = []
+        for link in links:
+            if is_valid(link):
+                result.append(link)
+            else:
+                urlsFile.write(str(link) + " -1\n")
     finally:
         urlsFile.close()
-
-    result = []
-    for link in links:
-        if is_valid(link):
-            urlsFile.write(link + " " + tokenize(contentText))
-            result.append(link)
-        else:
-            urlsFile.write(link + " " + "-1")
 
     return result;
 
@@ -43,7 +43,14 @@ def normalize_link(current_link, new_link):
     parsedOld = urlparse(current_link)
     if(parsed.path != "" and parsed.netloc == ""):
         if(re.match(r"\w+@\w+\.[a-zA-Z]+", parsed.path) is None): #verify path is not an email, so we dont make a lot of bogus email links
-            return urlunparse((parsedOld[0], parsedOld[1], parsed[2], parsed[3], parsed[4], ""))
+            newPath = ""
+            if parsedOld[2][-1:] is '/' and parsed[2][:1] is '/':
+                newPath = parsedOld[2][:-1] + parsed[2]
+            elif parsedOld[2][-1:] not is '/' and parsed[2][:1] not is '/':
+                newPath = parsedOld[2] + '/' + parsed[2]
+            else:
+                newPath = parsedOld[2] + parsed[2]
+            return urlunparse((parsedOld[0], parsedOld[1], newPath, parsed[3], parsed[4], ""))
     return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
 
 
@@ -60,7 +67,7 @@ def is_valid(url):
         file = open("blacklist.txt", "r", encoding = "utf-8", errors = "ignore")
         nextLine = file.readline()
         while nextLine:
-            if(re.match(nextLine, str(parsed.geturl())) is not None):
+            if(re.match(nextLine.strip(), str(parsed.geturl())) is not None):
                 print("Ignored " + parsed.geturl() + " due to blacklist line" + nextLine)
                 return False
             nextLine = file.readline()
