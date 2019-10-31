@@ -1,4 +1,5 @@
 import re
+from os.path import normpath
 import lxml.html as lxml
 from lxml import etree
 from urllib.parse import urlparse
@@ -43,13 +44,15 @@ def normalize_link(current_link, new_link):
     parsedOld = urlparse(current_link)
     if(parsed.path != "" and parsed.netloc == ""):
         if(re.match(r"\w+@\w+\.[a-zA-Z]+", parsed.path) is None): #verify path is not an email, so we dont make a lot of bogus email links
-            newPath = ""
+            newPath = parsed[2]
             if parsedOld[2][-1:] is '/' and parsed[2][:1] is '/':
                 newPath = parsedOld[2][:-1] + parsed[2]
-            elif parsedOld[2][-1:] not is '/' and parsed[2][:1] not is '/':
+            elif not parsedOld[2][-1:] is '/' and not parsed[2][:1] is '/':
                 newPath = parsedOld[2] + '/' + parsed[2]
             else:
                 newPath = parsedOld[2] + parsed[2]
+            newPath = normpath(newPath)
+            newPath = re.sub(r"\\", '/', normpath(newPath))
             return urlunparse((parsedOld[0], parsedOld[1], newPath, parsed[3], parsed[4], ""))
     return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
 

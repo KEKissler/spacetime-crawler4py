@@ -24,3 +24,8 @@
 .*?evoke\.ics\.uci\.edu\/.*?\/\?replytocom=\d+
 .*?wics\.ics\.uci\.edu\/events\/\d{4}-\d{2}(-\d{2})?
 .*?cs\.uci\.edu\/%20.*?@uci\.edu
+.*?ics\.uci\.edu\/~dan\/.*?\/~dan
+.*?ics\.uci\.edu\/computing\/linux\/hosts.php(\/feed\.php){2}
+.*?ics\.uci\.edu\/computing\/linux\/.*?\/((feed\.php)|(doku\.php)|(\/start))
+.*?ics\.uci\.edu.*?matt\.miller@uci\.edu
+.*?ics\.uci\.edu.*?\.php/?.+
