@@ -6,17 +6,6 @@ from urllib.parse import urlunparse
 from io import StringIO, BytesIO
 from bs4 import BeautifulSoup
 
-def tokenize():
-    #tokenCount = -1
-    #tokensFile = open("tokensFile","a+")
-    #count all tokens
-    #save tokens to file
-
-
-
-    return tokenCount
-
-
 def scraper(url, resp):
     if resp.status >= 400 and resp.status < 600:
         return list()
@@ -31,7 +20,7 @@ def scraper(url, resp):
     for contentGroup in soup.find_all(['p', 'title', re.compile(r"^h[0-9]+$")]):
         for string in contentGroup.stripped_strings:
             contentText += string + ' '
-    urlsFile = open("urls.txt","a+")
+    urlsFile = open("frontier.shelve.urls.txt","a+")
 
     result = []
     for link in links:
