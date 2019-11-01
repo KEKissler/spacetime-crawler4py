@@ -37,7 +37,11 @@ def scraper(url, resp):
     return result;
 
 def extract_next_links(url, soup):
-    return [urljoin(url, link.get('href')) for link in soup.find_all('a')]
+    return [remove_fragment(urljoin(url, link.get('href'))) for link in soup.find_all('a')]
+
+def remove_fragment(url):
+    parsed = urlparse(url)
+    return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
 '''
 def normalize_link(current_link, new_link):
     print("\t\tProcessingLink: " + new_link)
@@ -86,7 +90,7 @@ def is_valid(url):
             + r"|thmx|mso|arff|rtf|jar|csv"
             + r"|rm|smil|wmv|swf|wma|zip|rar|gz"
 	    + r"|pdf|pdfs|css|js|ppts|exe|o"
-            + r"tvs|bgz|tbi|bib"
+            + r"|tvs|bgz|tbi|bib|m|odc|pps"
             + r"|war|apk|sql|ppsx|pptx)$", parsed.path.lower())
 
     except TypeError:
