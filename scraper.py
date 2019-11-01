@@ -4,6 +4,7 @@ import lxml.html as lxml
 from lxml import etree
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
+from urllib.parse import urljoin
 from Tokenize import tokenize
 from io import StringIO, BytesIO
 from bs4 import BeautifulSoup
@@ -15,8 +16,7 @@ def scraper(url, resp):
         return list()
     if resp.status == 200 and resp.raw_response is None:
         return list()
-    
-    soup = BeautifulSoup(resp.raw_response.text.encode("utf-8"), features="lxml")
+    soup = BeautifulSoup(resp.raw_response.content, features="lxml")
     links = extract_next_links(url, soup)
     contentText = ""
     for contentGroup in soup.find_all(['p', 'title', re.compile(r"^h[0-9]+$")]):
@@ -37,25 +37,26 @@ def scraper(url, resp):
     return result;
 
 def extract_next_links(url, soup):
-    return [normalize_link(url, link.get('href')) for link in soup.find_all('a')]
-
+    return [urljoin(url, link.get('href')) for link in soup.find_all('a')]
+'''
 def normalize_link(current_link, new_link):
+    print("\t\tProcessingLink: " + new_link)
     parsed = urlparse(new_link)
     parsedOld = urlparse(current_link)
     if(parsed.path != "" and parsed.netloc == ""):
-        if(re.match(r"\w+@\w+\.[a-zA-Z]+", parsed.path) is None): #verify path is not an email, so we dont make a lot of bogus email links
-            newPath = parsed[2]
-            if parsedOld[2][-1:] is '/' and parsed[2][:1] is '/':
-                newPath = parsedOld[2][:-1] + parsed[2]
-            elif not parsedOld[2][-1:] is '/' and not parsed[2][:1] is '/':
-                newPath = parsedOld[2] + '/' + parsed[2]
-            else:
-                newPath = parsedOld[2] + parsed[2]
+        print("\trelative link found with path: " +  parsed.path + "\n\t" + "netloc is: " + parsed.netloc)
+        if(re.match(r"@+", parsed.path) is None): #verify path is not an email, so we dont make a lot of bogus email links
+            newPath = parsedOld[2]
+            try:
+                newPath = newPath[:newPath.rfind(r'/')]
+            except ValueError:
+                newPath = ""
+            newPath += parsed[2]
             newPath = normpath(newPath)
             newPath = re.sub(r"\\", '/', normpath(newPath))
             return urlunparse((parsedOld[0], parsedOld[1], newPath, parsed[3], parsed[4], ""))
     return urlunparse((parsed[0], parsed[1], parsed[2], parsed[3], parsed[4], ""))
-
+'''
 
 def is_valid(url):
     try:
@@ -85,7 +86,7 @@ def is_valid(url):
             + r"|thmx|mso|arff|rtf|jar|csv"
             + r"|rm|smil|wmv|swf|wma|zip|rar|gz"
 	    + r"|pdf|pdfs|css|js|ppts|exe|o"
-            + r"tvs|bgz|tbi"
+            + r"tvs|bgz|tbi|bib"
             + r"|war|apk|sql|ppsx|pptx)$", parsed.path.lower())
 
     except TypeError:

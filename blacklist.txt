@@ -5,7 +5,9 @@
 .*?grape\.ics\.uci\.edu\/wiki\/asterix\/timeline.*
 .*?graph\.ics\.uci\.edu.*?&format=txt
 .*?grape\.ics\.uci\.edu\/wiki\/asterix\/wiki\/stats170ab-2018\?version=\d+
-.*?ics\.uci\.edu\/\w\d\d\.html$
+.*?ics\.uci\.edu\/\w\d\{2}.html$
+.*?ics\.uci\.edu\/\d{6}\w?\.html$
+.*?ics\.uci\.edu\/\d+$
 .*?ics\.uci\.edu\/~kibler\/javacourse\/java.html
 .*?archive\.ics\.uci\.edu.*
 .*?\.ics\.uci\.edu\/~kay\/wordlist.*
@@ -27,5 +29,11 @@
 .*?ics\.uci\.edu\/~dan\/.*?\/~dan
 .*?ics\.uci\.edu\/computing\/linux\/hosts.php(\/feed\.php){2}
 .*?ics\.uci\.edu\/computing\/linux\/.*?\/((feed\.php)|(doku\.php)|(\/start))
+.*?ics\.uci\.edu\/.*?\/view_press.+
 .*?ics\.uci\.edu.*?matt\.miller@uci\.edu
-.*?ics\.uci\.edu.*?\.php/?.+
+.*?ics\.uci\.edu.*?\.php/.*?\.php
+.*?ics\.uci\.edu\/\\.*
+.*?ics\.uci\.edu\/community\/news\/press\/index.php.+
+.*?~eppstein.*?~eppstein
+.*?ics\.uci\.edu\/~eppstein\/pix\/.+
+.*?ics\.uci\.edu\/about\/visit\/visit_from.*?\.php.+
