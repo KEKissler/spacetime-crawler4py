@@ -44,3 +44,5 @@
 .*?chenli\.ics\.uci\.edu\/“.+
 .*?ics\.uci\.edu\/download\/download\.inc\.php.+
 .*?stat\.uci\.edu\/wp-content\/stat\/uploads.+
+.*?ics\.uci\.edu\/~agelfand.*?\/largeFam3-.+
+.*?cert\.ics\.uci\.edu.*?((seminar)|(EMWS09)|(Nanda)).*?((seminar)|(EMWS09)|(Nanda))+
